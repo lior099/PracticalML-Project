@@ -11,26 +11,26 @@ The dataset used in this project is the is from Kaggle, in the following link: h
 
 The folowing packages were used by us in this poject:
 
-• csv
+• numpy
 
-• os
+• pandas 
 
-• copy 
+• sklearn  
 
-• numpy 
+• xgboost  
+
+• matplotlib
+
+• seaborn 
+
+• heapq  
+
+• operator 
 
 • torch
 
-• PIL
+• argparse
 
-• matplotlib 
-
-• torchvision
-
-• xml
-
-• pytorchcv
-
-• pl_bolts
+• nni (for hyper-parameter tuning)
 
 
