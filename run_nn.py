@@ -99,48 +99,6 @@ def get_data():
 
     return df_data
 
-def plot_corr(df_data):
-
-    likely_cat = {}
-    for var in df_data.iloc[:,1:].columns:
-        likely_cat[var] = 1.*df_data[var].nunique()/df_data[var].count() < 0.002
-
-    num_cols = []
-    cat_cols = []
-    for col in likely_cat.keys():
-        if (likely_cat[col] == False):
-            num_cols.append(col)
-        else:
-            cat_cols.append(col)
-
-
-
-    corr = df_data[num_cols].corr()
-
-    fig = plt.figure(figsize=(12,12),dpi=80)
-    mask = np.triu(np.ones_like(corr, dtype=bool))
-    sns.heatmap(corr, mask=mask, cmap='BuPu', robust=True, center=0,
-                square=True, linewidths=.5)
-    plt.title('Correlation of Numerical(Continous) Features', fontsize=15,font="Serif")
-    plt.show()
-
-
-    df_distr =df_data.groupby('target')[num_cols].mean().reset_index().T
-    df_distr.rename(columns={0:'0_Label',1:"1_Label"}, inplace=True)
-
-    #plt.style.use('ggplot')
-    plt.rcParams['axes.facecolor']='w'
-    ax = df_distr[1:-3][['0_Label','1_Label']].plot(kind='bar', title ="Distribution of Average values across Target", figsize=(12, 8), legend=True, fontsize=12)
-    ax.set_xlabel("Numerical Features", fontsize=14)
-    ax.set_ylabel("Average Values", fontsize=14)
-    #ax.set_ylim(0,500000)
-    plt.show()
-
-
-
-    sns.catplot("page_rank", hue="target", data=df_data, kind="count",
-                palette={1:"green", 0:"blue"} ,height=5.0, aspect=11.7/8.27 )
-    plt.show()
 
 
 def create_external_test(df_data):
